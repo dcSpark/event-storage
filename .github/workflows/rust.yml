@@ -1,0 +1,75 @@
+name: Continuous Health Check
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/rust.yml'
+      - "**/Cargo.*"
+      - "fraos/**"
+      - "indexed_log_map/**"
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/rust.yml'
+      - "**/Cargo.*"
+      - "fraos/**"
+      - "indexed_log_map/**"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust:
+          - stable
+
+    steps:
+      - name: Install libudev
+        run: sudo apt update -y && sudo apt-get install -y libudev-dev
+
+      - name: "checkout"
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3.4.1
+        with:
+          node-version: 16.13.0
+
+      - name: "setup"
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          override: true
+          toolchain: ${{ matrix.rust }}
+          components: rustfmt, clippy
+
+      - uses: Swatinem/rust-cache@v1
+
+      - name: "rustfmt"
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          # don't use --workspace, rustfmt does not have this flag parameter
+          # so keep the --all
+          args: --all -- --check
+
+      - name: "clippy"
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: --locked --workspace --all-features --all-targets -- --deny warnings
+
+      - name: "Build"
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --locked --workspace --all-features
+
+      - name: "unit tests"
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: --locked --workspace --all-features

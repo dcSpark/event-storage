@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "fraos",
+    "indexed_log_map",
+]
+
+[workspace.metadata.release]
+shared-version = false
+tag = true
