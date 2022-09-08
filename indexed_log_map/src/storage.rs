@@ -4,6 +4,8 @@ use serde::de::DeserializeOwned;
 use serde::Serialize;
 use std::marker::PhantomData;
 
+/// Indexed log map inherits the properties of fraos::Database (thread safety) and allows
+/// access by key
 pub struct IndexedLogMap<Key: Serialize + DeserializeOwned, Value: Serialize + DeserializeOwned> {
     storage: fraos::Database,
     // this is an option since we might want to take a look at

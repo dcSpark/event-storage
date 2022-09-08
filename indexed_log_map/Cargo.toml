@@ -2,6 +2,10 @@
 name = "indexed_log_map"
 version = "1.0.0"
 edition = "2021"
+readme = "README.md"
+license = "MIT"
+keywords = ["append-only", "key-value", "storage", "database"]
+categories = ["database"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -14,6 +18,5 @@ serde_json = { version = "1.0" }
 sled = { version = "0.34" }
 
 [dev-dependencies]
-clap = { version = "3.2", features = ["derive", "cargo"] }
 rand = { version = "0.8" }
 tempfile = "3.3.0"
