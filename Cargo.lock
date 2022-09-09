@@ -168,7 +168,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "eabb4a44450da02c90444cf74558da904edde8fb4e9035a9a6a4e15445af0bd7"
 
 [[package]]
-name = "indexed_log_map"
+name = "indexed-log-map"
 version = "1.0.0"
 dependencies = [
  "anyhow",
