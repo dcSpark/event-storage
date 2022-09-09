@@ -7,14 +7,14 @@ on:
       - '.github/workflows/rust.yml'
       - "**/Cargo.*"
       - "fraos/**"
-      - "indexed_log_map/**"
+      - "indexed-log-map/**"
   pull_request:
     branches: [ main ]
     paths:
       - '.github/workflows/rust.yml'
       - "**/Cargo.*"
       - "fraos/**"
-      - "indexed_log_map/**"
+      - "indexed-log-map/**"
 
 env:
   CARGO_TERM_COLOR: always

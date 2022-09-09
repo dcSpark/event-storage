@@ -1,7 +1,7 @@
 [workspace]
 members = [
     "fraos",
-    "indexed_log_map",
+    "indexed-log-map",
 ]
 
 [workspace.metadata.release]
