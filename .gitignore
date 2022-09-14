@@ -8,6 +8,7 @@
 # Rust
 target/
 book/
+Cargo.lock
 
 # Mac files
 **/.DS_STore
